@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRCTC Redirected Links</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Custom CSS -->
+<style>
+body {
+	padding-top: 70px;
+}
+
+.navbar {
+	background-color: #3d8bc7; /* IRCTC Red  #e31e26;  //#3d5c9b;   */
+	color: white;
+}
+
+.navbar-nav .nav-link {
+	color: white;
+}
+
+.redirect-links {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+footer {
+	background-color: #3d8bc7; /* IRCTC Dark Grey #1a1a1a; */
+	color: white;
+	/*  position:fixed;*/
+	bottom: 0;
+	width: 100%;
+	padding: 8px 0;
+	text-align: center;
+	margin-top: 60px;
+}
+
+.img_container {
+	text-align: center;
+	margin-top: 90px;
+}
+
+.contain_welcome h1 {
+	margin-top: 90px;
+	margin-left: 150px;
+	color: #325773;
+}
+
+.contain_welcome h1 span {
+	color: orange;
+}
+</style>
+</head>
+<body>
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand">IRCTC</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<!-- Redirected links -->
+					<li class="nav-item redirect-links">
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/user/registration}">Register</a></li>
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/user/login}">Login</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="img_container">
+
+		<img th:src="@{/image/launcher.gif}" height="15%" width="15%"><br>
+		<img th:src="@{image/namaste1.jpg}" height="15%" width="15%">
+
+	</div>
+	<!-- Page content -->
+
+	<div class="contain_welcome">
+		<h1>
+			Welcome to <span>IRCTC</span>
+		</h1>
+	</div>
+	<div class="container mt-4">
+
+		<p>The Indian Railway Catering and Tourism Corporation (IRCTC) is
+			a government-owned company under the Ministry of Railways, India.
+			Established in 1999, IRCTC plays a pivotal role in managing various
+			services related to Indian Railways, catering to the needs of
+			millions of passengers and tourists across the country.</p>
+
+		<p>One of IRCTC's primary functions is facilitating online ticket
+			booking for train journeys, offering a convenient platform for
+			passengers to book tickets, check train schedules, and manage their
+			reservations.IRCTC has streamlined the ticketing process, enabling
+			passengers to book tickets from the comfort of their homes or on the
+			go.</p>
+
+		<p>In addition to ticketing, IRCTC manages catering services
+			onboard trains and at railway stations. It ensures the provision of
+			quality food and beverages to passengers during their journey,
+			offering a diverse range of menu options to cater to different tastes
+			and preferences. IRCTC also operates e-catering services, allowing
+			passengers to order food from select restaurants and have it
+			delivered to their train seat.</p>
+
+		<p>Through its relentless commitment to customer satisfaction and
+			innovation, IRCTC continues to play a significant role in enhancing
+			the travel experience of passengers, promoting tourism, and
+			contributing to the growth and development of the Indian Railways
+			ecosystem.</p>
+	</div>
+
+	<footer>
+		<div class="container">
+			<p>© 2024 IRCTC. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

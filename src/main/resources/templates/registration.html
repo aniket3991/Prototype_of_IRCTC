@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+
+.container-div
+{
+display:flex;
+flex-direction:space-evenly;
+
+}
+.form-container {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px 20px;
+	background-color:#a5b9c9;
+	margin-top: 4px;
+	border-radius: 5px;
+	margin-left: 340px;
+	border: 2px solid #cCc;
+	opacity:20px;
+}
+.container img
+{
+margin-left:-42px;
+margin-right:10px;
+
+}
+body {
+	padding-top: 70px; /* Adjust for fixed navbar height */
+}
+
+.navbar {
+	background-color:#3d8bc7;
+	color: white;
+}
+
+.navbar-nav .nav-link {
+	color: white;
+}
+
+.redirect-links {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+footer {
+    background-color: #3d8bc7;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#radio-error {
+	display: block;
+}
+
+.img_container
+{
+margin-left:210px;
+margin-top:20%;
+
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+		<div class="container" >
+		<img th:src="@{/image/secondry-logo.png}"  height="40px" width="50px"></img>
+			<a class="navbar-brand">IRCTC</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<!-- Redirected links -->
+					<li class="nav-item redirect-links">
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a>
+							</li>
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/user/login}">Login</a></li>
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/ContactUs}">Contact</a></li>
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+<div class="container-div">
+	<div class="container" style="margin-left:-20px;">
+		<div class="form-container">
+			<h2 class="text-center mb-4" style="color:#325773">Create IRCTC Account</h2>
+			<form name="registrationForm" id="registrationForm"
+				th:action="@{/user/registration}"  th:object="${user}" method="POST">
+				<div class="form-group">
+
+					<input type="text" th:field="*{firstName}" class="form-control"
+						placeholder="First Name" id="firstName"
+						th:classappend="${#fields.hasErrors('firstName') ?'is-invalid':''}">
+					<div th:each="e : ${#fields.errors('firstName')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+					<small style="color: #dc3545; font-size: 10px;"></small>
+
+				</div>
+				<div class="form-group">
+					<input type="text" th:field="*{lastName}" class="form-control"
+						placeholder="Last Name" id="lastName"
+						th:classappend="${#fields.hasErrors('lastName') ?'is-invalid':''}">
+					<div th:each="e : ${#fields.errors('lastName')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+					<small style="color: #dc3545; font-size: 10px"></small>
+				</div>
+				<div class="form-group">
+					<input type="tel" th:field="*{contact}" class="form-control"
+						placeholder="Phone" id="phone"
+						th:classappend="${#fields.hasErrors('contact') ?'is-invalid':''}">
+					<div th:each="e : ${#fields.errors('contact')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+					<small style="color: #dc3545; font-size: 10px;"></small>
+				</div>
+				<div class="form-group">
+					<input type="text" th:field="*{email}" class="form-control"
+						placeholder="Email" id="email"
+						th:classappend="${#fields.hasErrors('email') ?'is-invalid':''}">
+					<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+					<small style="color: #dc3545; font-size: 10px;"></small>
+				</div>
+				<div class="form-group">
+					<input type="password" th:field="*{password}" class="form-control"
+						placeholder="Password" id="password"
+						th:classappend="${#fields.hasErrors('password') ?'is-invalid':''}">
+					<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+					<small style="color: #dc3545; font-size: 10px;"></small>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control"
+						placeholder="Confirm Password" id="confirmPassword"> <small
+						style="color: #dc3545; font-size: 10px;"></small>
+				</div>
+				<div class="form-group">
+
+					<div class="form-check form-check-inline" id="userAdminAccount">
+						<input class="form-check-input" type="radio" th:field="*{role}"
+							th:value="user" name="userType" id="user" value="user"
+							th:classappend="${#fields.hasErrors('role')?'is-invalid':''}">
+						<label class="form-check-label" for="user">User</label> <br>
+
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" th:field="*{role}"
+							th:value="admin" name="userType" id="admin" value="admin"
+							th:classappend="${#fields.hasErrors('role') ?'is-invalid':''}">
+						<label class="form-check-label" for="admin">Admin</label> <br>
+					</div>
+
+					<div id="radio-error" class="invalid-feedback"
+						th:each="e: ${#fields.errors('role')}" th:text="${e}"></div>
+					<small style="color: #dc3545; font-size: 10px;"></small>
+
+
+					<div th:if="${existedUser}">
+						<script>alert("Email already registered try to login")</script>
+					</div>
+
+				</div>
+				<button type="submit" class="btn btn-primary btn-block active">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="img_container">
+	<img th:src="@{/image/Train.png}"  height="140px" width="280px"></img>
+	</div>
+</div>
+
+	
+	<footer>
+		<div class="container">
+			<p>© 2024 IRCTC. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script>
+	    
+    function formFieldValidation(){
+            var firstName = document.getElementById("firstName");
+            var lastName = document.getElementById("lastName");
+            var phone = document.getElementById("phone");
+            var email = document.getElementById("email");
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirmPassword");
+            var userAdminAccount = document.getElementById("userAdminAccount");
+            
+            
+            removeAllError(firstName, lastName, phone, email, password, confirmPassword, userAdminAccount);
+
+            if (firstName.value.trim() === ""){
+            	showError(firstName, "*First Name should not be blank");
+      	        }
+
+            else if (lastName.value.trim() === ""){
+            	showError(lastName, "*Last Name should not be blank");
+      	        }
+            	
+
+            else if (phone.value.trim() === "" || !validatePhoneNumber(phone.value)){
+            	showError(phone, "*Invalid Contact");
+      	        }
+            	
+
+            else if (email.value.trim() === "" || !validateEmail(email.value)){
+            	showError(email, "*Invalid email");
+      	        }
+            	
+
+            else if (password.value.trim() === ""){
+            	showError(password, "*password should not be blank");
+      	        }
+            	
+
+            else if (!isPasswordMatch()){
+            	showError(confirmPassword, "*password and confirm password should be same");
+      	        }
+            else if (!isAccountTypeSelected()){
+            	showError(userAdminAccount, "*Kindly select Account Type");
+      	        }
+    };
+
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    	formFieldValidation();
+    });
+    
+    function showError(input, errMessage){
+	    const parentElement = input.parentElement;
+	    const small = parentElement.querySelector('small');
+	    small.innerHTML = errMessage;
+	    input.classList.add("is-invalid");
+	    event.preventDefault();
+	  };
+	
+	  function removeError(input){
+		    const formControl = input.parentElement;
+		    const small = formControl.querySelector('small');
+		    small.innerHTML = "";
+		    input.classList.remove("is-invalid");
+		  };
+	  
+	  function removeAllError(firstName, lastName, phone, email, password, confirmPassword, userAdminAccount){
+		  removeError(firstName);
+		  removeError(lastName);
+		  removeError(phone);
+		  removeError(email);
+		  removeError(password);
+		  removeError(confirmPassword);
+		  removeError(userAdminAccount);
+	  };
+	  
+	  function validatePhoneNumber(phoneNumber) {
+	      var phonePattern = /^\d{10}$/;
+	      return phonePattern.test(phoneNumber);
+	    };
+	  
+	  function validateEmail(email) {
+		  var validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		  return email.match(validRegex);
+		}
+	  
+	  function isPasswordMatch(){
+		  var password = document.getElementById("password").value;
+		  var confirmPassword = document.getElementById("confirmPassword").value;
+	      return password === confirmPassword;
+	    };
+	    
+	    function isAccountTypeSelected(){
+	    	return document.getElementById("user").checked || document.getElementById("admin").checked;
+	    };
+    
+</script>
+
+</body>
+</html>

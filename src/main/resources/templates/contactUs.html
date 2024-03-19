@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+ 
+<title>Contact Us</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .map-container {
+      height: 300px;
+      margin-top: 20px;
+    }
+    .header1 {
+	color: black;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	background-color:#eef1f3;
+}
+
+.header1 b {
+	margin-top: 10px;
+	margin-right: 42%;
+	font-size: 20px;
+	margin-left: 2px;
+	color: rgb(0, 0, 128);
+}
+
+.header1 img {
+	margin-left: 20px;
+	margin-top: 2px;
+}
+
+.header1  a {
+	margin-left: 30px;
+	padding: 12px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.header1 a:hover {
+	color: blue;
+	text-decoration: none;
+}
+
+a:active {
+	color: blue;
+}
+
+a:visited {
+	color: green;
+}
+
+    
+  </style>
+</head>
+<body>
+<header class="header1">
+		<img th:src="@{/image/secondry-logo.png}" height="70px" width="70px"></img>
+		<b>WELCOME </b>  <a th:href="@{/searchTrain}">Trains</a>
+		
+	</header>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>List of Contacts</h2> 
+        <ul>
+          <li>Name: John Doe, Phone: +1234567890</li>
+          <li>Name: Jane Smith, Phone: +0987654321</li>
+          <li>Name: Alice Johnson, Phone: +1122334455</li>
+          <li>Name: Bob Williams, Phone: +3344556677</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h2>Google Map</h2>
+        <div class="map-container">
+          <!-- Google Map will be displayed here -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3441.880799820885!2d78.43275831508912!3d17.38504446617194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb98ef71e3809d%3A0x94415907103a8c0!2sIndian%20Railway%20Catering%20%26%20Tourism%20Corporation%20Limited!5e0!3m2!1sen!2sin!4v1648209301610!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">Contact IRCTC</div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+              </div>
+              <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  </body>
+  </html>
+

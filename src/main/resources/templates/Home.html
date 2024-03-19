@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <title>Home Page</title>
+    <style>
+      .header1 {
+        color: black;
+        font-size: 20px;
+        display: flex;
+        flex-direction: row;
+        background-color: lightblue;
+      }
+
+      .header1 b {
+        margin-top: 10px;
+        margin-right: 42%;
+        font-size: 20px;
+        margin-left: 2px;
+        color: rgb(0, 0, 128);
+      }
+
+      .header1 img {
+        margin-left: 20px;
+        margin-top: 2px;
+      }
+
+      .header1 a {
+        margin-left: 30px;
+        padding: 12px 0px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .header1 a:hover {
+        color: blue;
+        text-decoration: none;
+      }
+
+      a:active {
+        color: blue;
+      }
+
+      a:visited {
+        color: green;
+      }
+
+      .container5 {
+        background: url("/image/vb.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-top: 1%;
+        padding: 20px 20px;
+        margin-left: 10%;
+        margin-right: 35px;
+        ;
+      }
+
+      .search_form {
+        background-color: white;
+        width: 45%;
+        margin-left: 6%;
+        border: 2px solid white;
+        border-radius: 2%;
+        text-align: center;
+      }
+
+      .form_header {
+        display: flex;
+        flex-direction: coloum;
+        padding: 10px;
+      }
+
+      .form_header b {
+        margin-left: 50px;
+        font-size: 23px;
+        margin-top: 20px;
+      }
+
+      .img1_div {
+        margin-left: 5%;
+      }
+
+      .img2_div {
+        margin-left: 13%;
+      }
+
+      .container1 {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group2 {
+        margin-bottom: 20px;
+        width: 90%;
+        background-color: orange;
+      }
+
+      .is-invalid {
+        border: 1px solid red;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 60%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .features {
+        margin-top: 3%;
+        margin-left: 20%;
+        margin-right: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .features2 {
+        margin-top: 1%;
+        margin-left: 10%;
+        margin-right: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 50%;
+      }
+
+      .features div {
+        display: flex;
+        margin-left: 20px;
+        flex-direction: column;
+      }
+
+      .features2 div {
+        display: flex;
+        margin-left: 20px;
+        flex-direction: column;
+      }
+
+      .img_part {
+        border: 2px solid #ccc;
+        border-bottom: none;
+        padding: 5px 5px;
+      }
+
+      .desc_part {
+        border: 2px solid #ccc;
+        border-top: none;
+        padding: 15px 20px;
+        text-align: left
+      }
+
+      .desc_part b {
+        font-size: 20px;
+      }
+
+      /*how its works*/
+      .div_works {
+        display: flex;
+        justify-content: space-evenly;
+        margin-left: 10%;
+        margin-right: 1%;
+        font-size: 20px;
+        margin-top: 60px;
+      }
+
+      .sandd {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid white;
+        width: 20%;
+        margin-left: -50px;
+      }
+
+      .sandd div {
+        text-align: center;
+      }
+
+      .date {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid white;
+        padding: 2px;
+        text-align: center;
+        width: 20%;
+      }
+
+      .date div {
+        text-align: center;
+      }
+
+      .book {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid white;
+        width: 20%;
+        padding: 2px;
+      }
+
+      .book div {
+        text-align: center;
+      }
+
+      .steps {
+        border: 2px solid orange;
+        padding: 10px;
+        margin-top: -20px;
+      }
+
+      .steps:hover {
+        background-color: orange;
+      }
+
+      .Content {
+        margin-top: -10px;
+        text-align: center;
+      }
+
+      .slider_section {
+        margin-top: 1%;
+        margin-left: 10%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .content_train {
+        width: 50%;
+      }
+
+      .slide {
+        margin-top: 10px;
+      }
+
+      .contain_welcome h1 {
+        margin-top: 10px;
+        margin-left: 16%;
+        color: #325773;
+      }
+
+      .contain_welcome h1 span {
+        color: orange;
+      }
+
+      .rail_info {
+        background: url("/image/exterior.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-top: 1%;
+        height: 150px;
+        padding: 20px 20px;
+        margin-left: 10%;
+        margin-right: 35px;
+        ;
+      }
+
+      .rail_info p {
+        color: white;
+      }
+
+      .service {
+        text-align: center;
+        font-size: 25px;
+        margin-top: 5%;
+        font-weight: bold;
+      }
+
+      .img_service {
+        margin-left: 10%;
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .img_service div:hover {
+        opacity: 4;
+      }
+
+      .Container {
+        margin-top: 15px;
+        background-color: #3d8bc7;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header1">
+      <img th:src="@{/image/secondry-logo.png}" height="70px" width="70px"></img>
+      <b>WELCOME TO INDIAN RAILWAY</b>
+      <a th:href="@{/searchTrain}">Trains</a>
+      <a>Book Now</a>
+      <a th:href="@{/ContactUs}">Contact</a>
+    </header>
+    <div class="container5">
+      <div class="search_form">
+        <div class="form_header">
+          <img th:src="@{/image/G20_logo.png}" height="20%" width="20%" class="img1_div">
+          <b>BOOK TICKET</b>
+          <img th:src="@{/image/logo_top_eng.jpg}" height="20%" width="20%" class="img2_div">
+        </div>
+        <div class="container1">
+          <form id="irctcForm" th:action="@{/train/searchBydate}" th:object="${search}" method="POST">
+            <div class="form-group">
+              <label for="sourceStation">Source Station:</label>
+              <input type="text" th:field="*{source}" placeholder="Enter Source" id="sourceStation">
+              <br>
+              <small style="color: #dc3545; font-size: 15px;"></small>
+            </div>
+            <div class="form-group">
+              <label for="destinationStation">Destination Station:</label>
+              <input type="text" th:field="*{destination}" placeholder="Enter destination" id="destinationStation">
+              <br>
+              <small style="color: #dc3545; font-size: 15px;"></small>
+            </div>
+            <div class="form-group">
+              <label for="destinationStation">Date:</label>
+              <input type="date" th:field="*{date}" id="travelDate" required>
+              <br>
+              <small style="color: #dc3545; font-size: 15px;"></small>
+            </div>
+            <div class="form-group">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+          <div>
+            <form th:action="@{/train/details}">
+              <button type="submit" class="form-group2">Try Search by Train Id</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <center>
+      <br>
+      <br>
+      <h2 style="color: black; font-family: calibre;">How its work!</h2>
+    </center>
+    <div class="div_works">
+      <div class="sandd">
+        <div>
+          <img th:src="@{/image/sear.png}" height="50%" width="40%">
+        </div>
+        <p class="steps" style="width: 260px; margin-top: 15px;">1.Enter source and destination</p>
+        <p class="Content">Enter your source And Destination</p>
+      </div>
+      <div class="date" style="margin-left: 30px;">
+        <div>
+          <img th:src="@{/image/calen.jpg}" height="70%" width="70%">
+        </div>
+        <p class="steps">2.Enter Date</p>
+        <p class="Content"> Enter the your <br>journey date </p>
+      </div>
+      <div class="book">
+        <div>
+          <img th:src="@{https://www.wikihow.com/images/thumb/2/2b/Enjoy-a-Train-Ride-Step-1-Version-2.jpg/v4-460px-Enjoy-a-Train-Ride-Step-1-Version-2.jpg.webp}" height="70%" width="70%">
+        </div>
+        <p class="steps">3.Enjoy your journey</p>
+        <p class="Content">enjoy your journey</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="rail_info">
+      <p>Indian Railways introduced the concept of operating tourist trains on theme based circuits under the banner of Bharat Gaurav Tourist Trains. The journeys undertaken on these trains are on the diverse circuits which are offered in the form of tour packages wherein services like off-board travel and excursions by buses, stay at hotels, tour guides, meals, travel insurance etc are provided along with comfortable train journey and allied onboard services.</p>
+    </div>
+    <div class="service">
+      <p> Have you not found the right one? <br> Find a service suitable for you here. </p>
+    </div>
+    <div class="img_service">
+      <div>
+        <img th:src="@{/image/cater.png}" height="100%" width="100%">
+      </div>
+      <div>
+        <img th:src="@{/image/t.png}" height="100%" width="100%">
+      </div>
+      <div>
+        <img th:src="@{/image/hill.png}" height="100%" width="100%">
+      </div>
+      <div>
+        <img th:src="@{/image/holiday.png}" height="100%" width="100%">
+      </div>
+    </div>
+    <br>
+    <center>
+      <h1 style="color: lightBlue;"> HOLIDAYS </h2>
+    </center>
+    <div class="features">
+      <div>
+        <div class="img_part">
+          <img th:src="@{/image/exterior.jpg}" height="100%">
+        </div>
+        <div class="desc_part">
+          <b>Maharajas' Express</b>
+          <br> Redefining Royalty, Luxury and Comfort, Maharajas' express takes you on a sojourn to the era of bygone stately splendour of princely states. Sylvan furnishings, elegant ambience and modern amenities are amalgamated for an “Experience Unsurpassed”. It has been a winner of “World’s Leading Luxury train” by World Travel Awards consecutively for last six years.
+        </div>
+      </div>
+      <div>
+        <div class="img_part">
+          <img th:src="@{/image/Kashmir.jpg}" height="100%">
+        </div>
+        <div class="desc_part">
+          <b>International Packages</b>
+          <br> Best deals in International Holiday packages, handpicked by IRCTC, for Thailand, Dubai, Sri Lanka, Hong Kong, China, Macau, Bhutan, Nepal, U.K., Europe, USA, Australia etc. The packages are inclusive of sightseeing, meals, visa charges and overseas medical insurance to give you a hassle-free and memorable experience.
+        </div>
+      </div>
+      <div>
+        <div class="img_part">
+          <img th:src="@{/image/Thailand.jpg}" height="100%">
+        </div>
+        <div class="desc_part">
+          <b>Rail Tour Packages</b>
+          <br> Be it the spiritual devotee seeking blessings of Tirupati, Shirdi or Mata Vaishno Devi or the leisure traveller wanting to relish the Blue mountains of North East, Sand-dunes of Rajasthan, Hamlets of Ladakh, Wonders of Himalayas, Serene lakes or Picturesque Islands, IRCTC has it all. Discover India through IRCTC!
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="features2">
+      <div>
+        <div class="img_part">
+          <img th:src="@{/image/Bharat_Gaurav.jpg}" height="100%">
+        </div>
+        <div class="desc_part">
+          <b>Bharat Gaurav Tourist Train</b>
+          <br> Redefining Royalty, Luxury and Comfort, Maharajas' express takes you on a sojourn to the era of bygone stately splendour of princely states. Sylvan furnishings, elegant ambience and modern amenities are amalgamated for an “Experience Unsurpassed”. It has been a winner of “World’s Leading Luxury train” by World Travel Awards consecutively for last six years.
+        </div>
+      </div>
+      <div>
+        <div class="img_part">
+          <img th:src="@{/image/Manali.jpg}" height="100%">
+        </div>
+        <div class="desc_part">
+          <b>Rail Tour Packages</b>
+          <br> Best deals in International Holiday packages, handpicked by IRCTC, for Thailand, Dubai, Sri Lanka, Hong Kong, China, Macau, Bhutan, Nepal, U.K., Europe, USA, Australia etc. The packages are inclusive of sightseeing, meals, visa charges and overseas medical insurance to give you a hassle-free and memorable experience.
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementById("irctcForm").addEventListener("submit", function(event) {
+        var source = document.getElementById("sourceStation");
+        var destination = document.getElementById("destinationStation");
+        var dateInput = document.getElementById("travelDate");
+        removeError(source);
+        removeError(destination);
+        if (source.value === "") {
+          showError(source, "*please enter source")
+        } else if (destination.value === "") {
+          showError(destination, "*please enter destination")
+        } else if (!validateDate(dateInput)) {
+          showError(dateInput, "*please enter valid date")
+        }
+      });
+
+      function showError(input, errMessage) {
+        const parentElement = input.parentElement;
+        const small = parentElement.querySelector('small');
+        small.innerHTML = errMessage;
+        input.classList.add("is-invalid");
+        event.preventDefault();
+      };
+
+      function removeError(input) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('small');
+        small.innerHTML = "";
+        input.classList.remove("is-invalid");
+      };
+
+      function validateDate(input) {
+        var enteredDate = input.valueAsDate;
+        return enteredDate || !isNaN(enteredDate.getTime());
+      };
+    </script>
+    <footer class="bg-dark text-white py-4" style="margin-top: 80px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Contact Us</h5>
+            <p> Indian Railway Catering and Tourism Corporation Ltd., <br> B-148, 11th Floor, Statesman House, <br> Barakhamba Road, New Delhi - 110001, India </p>
+            <p>Email: care@irctc.co.in</p>
+            <p>Phone: 139 (24x7 Customer Support)</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Follow Us</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#">Facebook</a>
+              </li>
+              <li>
+                <a href="#">Twitter</a>
+              </li>
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">YouTube</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>About Us</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#">About us </a>
+              </li>
+              <li>
+                <a href="#">Term and Condition</a>
+              </li>
+              <li>
+                <a href="#">Policy</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="bg-light">
+        <div class="text-center">
+          <p>&copy; 2024 IRCTC. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap JS script link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your custom scripts -->
+    <script src="scripts.js"></script>
+  </body>
+</html>
+<!-- -
+<div class="contain_welcome"><h1>More On <span>IRCTC !</span></h1></div><div class="slider_section"><div class="content_train"><p>The Indian Railway Catering and Tourism Corporation (IRCTC) is a government-owned company under the Ministry of Railways, India. Established in 1999, IRCTC plays a pivotal role in managing various services related to Indian Railways, catering to the needs of millions of passengers and tourists across the country.</p><p>One of IRCTC's primary functions is facilitating online ticket booking for train journeys, offering a convenient platform for passengers to book tickets, check train schedules, and manage their reservations.IRCTC has streamlined the ticketing process, enabling passengers to book tickets from the comfort of their homes or on the go.</p><p>In addition to ticketing, IRCTC manages catering services onboard trains and at railway stations. It ensures the provision of quality food and beverages to passengers during their journey, offering a diverse range of menu options to cater to different tastes and preferences. IRCTC also operates e-ca
+</div><div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="carousel-item active"><img th:src="@{/image/bharat.jpg}"  height="280px" width="80px" class="d-block w-100" alt="First slide"></div><div class="carousel-item"><img class="d-block w-100" th:src="@{/image/Train1_image.jpg}"  height="280px" width="80px" alt="Second slide"></div><div class="carousel-item"><img class="d-block w-100" th:src="@{/image/Indian.jpg}"  height="280px" width="80px"alt="Third slide"></div></div></div></div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+ -->

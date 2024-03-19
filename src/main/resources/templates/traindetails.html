@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Login Page</title>
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+.header1 {
+	color: black;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	background-color: #3d8bc7;
+}
+
+.header1 img {
+	margin-left: 60px;
+	margin-top: 5px;
+}
+
+.header1  a {
+	margin-left: 30px;
+	padding: 12px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.header1 span {
+	margin-left: 10px;
+	margin-right: 63%;
+	margin-top: 10px;
+	color: white;
+}
+
+.header1 a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+a:active {
+	color: blue;
+}
+
+a:visited {
+	color: black;
+}
+
+.search-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.search-input {
+	padding: 10px;
+	width: 400px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	outline: none;
+}
+
+small {
+	padding-right: 170px;
+}
+
+.search-button {
+	padding: 10px 20px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+	width: 10%;
+	margin-left: 20px;
+}
+
+.search-button:hover {
+	background-color: #45a049;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	align-self: center;
+	margin-top: 30px;
+	width: 70%;
+	align-content: center;
+}
+
+th, td {
+	padding: 10px;
+	border: 1px solid #000;
+}
+
+th {
+	background-color: #3498db;
+	color: white;
+}
+
+footer {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.is-invalid {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+	<header class="header1">
+		<img th:src="@{/image/secondry-logo.png}" height="40px" width="50px"></img>
+		<span>IRCTC</span> <a th:href="@{/user/home}">Home</a> <a>Contact</a>
+	</header>
+
+
+	<div class="search-container">
+		<form id="searchTrain" th:action="@{/train/details}" method="get">
+			<input type="text" class="search-input" name="id" id="trainNo"
+				placeholder="Enter train number">
+			<button type="submit" class="search-button">Search</button>
+			<br> <small style="color: #dc3545"></small>
+			<p style="color: #dc3545"
+				th:text="${incorrect} ? 'No Train found! Please enter a valid train no.' : ''"></p>
+		</form>
+	</div>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Train Number</th>
+				<th>Train Name</th>
+				<th>Source Station</th>
+				<th>Destination Station</th>
+				<th>Runs On</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="train : ${train}">
+				<td th:text="${train.trainNo}"></td>
+				<td th:text="${train.name}"></td>
+				<td th:text="${train.source}"></td>
+				<td th:text="${train.destination}"></td>
+				<td th:text="${schedule}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>S.NO</th>
+				<th>Station Code</th>
+				<th>Station Name</th>
+				<th>Arrival Time</th>
+				<th>Departure Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="route : ${route}">
+				<td th:text="${route.sNo}"></td>
+				<td th:text="${route.stationCode}"></td>
+				<td th:text="${route.stationName}"></td>
+				<td th:text="${route.arrivalTime}"></td>
+				<td th:text="${route.departureTime}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<footer>
+		<div class="container">
+			<p>© 2024 IRCTC. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script>
+		document.getElementById("searchTrain").addEventListener(
+				"submit",
+				function(event) {
+					
+					var trainNo = document.getElementById("trainNo");
+
+					removeError(trainNo);
+
+					if (trainNo.value.trim() === ""  || !checkTrainNo(trainNo.value))
+						showError(trainNo, "Invalid train number It must has 5 digits");
+				});
+
+		function showError(input, errMessage) {
+			const formControl = input.parentElement;
+			const small = formControl.querySelector('small');
+			small.innerHTML = errMessage;
+			input.classList.add("is-invalid");
+			event.preventDefault();
+		};
+
+		function removeError(input) {
+			const formControl = input.parentElement;
+			const small = formControl.querySelector('small');
+			small.innerHTML = "";
+			input.classList.remove("is-invalid");
+		};
+		
+		function checkTrainNo(trainNo){
+			if(trainNo.length !== 5)
+				return false;
+			
+			for(let i = 0; i < 5; i++){
+				if(!(trainNo.charAt(i) <= '9' && trainNo.charAt(i) >= '0')){
+					return false;
+				}
+			}
+			return true;
+		};
+	</script>
+
+
+</body>
+</html>

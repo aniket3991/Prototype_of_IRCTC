@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS -->
+
+<title>SearchTrain</title>
+<style>
+.header1 {
+	color: black;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	background-color: #eef1f3;
+}
+
+.header1 b {
+	margin-top: 10px;
+	margin-right: 42%;
+	font-size: 20px;
+	margin-left: 2px;
+	color: rgb(0, 0, 128);
+}
+
+.header1 img {
+	margin-left: 20px;
+	margin-top: 2px;
+}
+
+.header1  a {
+	margin-left: 30px;
+	padding: 12px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.header1 a:hover {
+	color: blue;
+	text-decoration: none;
+}
+
+a:active {
+	color: blue;
+}
+
+a:visited {
+	color: green;
+}
+
+.service {
+	text-align: left;
+	font-size: 25px;
+	margin-top: 5%;
+	margin-left: 10%;
+	font-weight: bold;
+	color: blue;
+}
+
+.galary {
+	display: flex;
+	margin: 2% 5%;
+}
+
+.train_details {
+	display: flex;
+	background-color: Offwhite;
+	margin: 0px 10%;
+}
+
+.train_details:hover {
+	box-shadow: 0 0 2px 2px #ccc;
+}
+
+.details_part {
+	width: 70%;
+	border: 2px solid #ccc;
+	text-align: left;
+}
+
+.details_part h4 {
+	margin-top: 8px;
+	margin-left: 30px;
+}
+
+.Book_part {
+	width: 30%;
+	background-color: #ccc;
+	border: 2px solid #ccc;
+	text-align: center;
+}
+
+.Book_part p {
+	margin-top: 30px;
+	font-size: 20px;
+}
+
+.Book_part button {
+	background-color: orange;
+	padding: 16px;
+	border: none;
+	color: black;
+	margin-top: 80px;
+	font-weight: bold;
+}
+
+.Book_part button:hover {
+	box-shadow: 0 0 2px 2px orange;
+}
+
+.train_info {
+	display: flex;
+	justify-content: space-evenly;
+	text-align: left;
+	margin-left: -60px;
+}
+</style>
+<body>
+	<header class="header1">
+		<img th:src="@{/image/secondry-logo.png}" height="70px" width="70px"></img>
+		<b>WELCOME TO TRAIN GALLARY</b> <a th:href="@{/searchTrain}">Trains</a>
+		<a>Book Now</a> <a th:href="@{/ContactUs}">Contact</a>
+	</header>
+
+	<div class="galary">
+		<div>
+			<img th:src="@{/image/A1.png}" height="200px" width="200px"></img>
+		</div>
+		<div>
+			<img th:src="@{/image/A2.png}" height="200px" width="200px"></img>
+		</div>
+		<div>
+			<img th:src="@{/image/A3.png}" height="200px" width="200px"></img>
+		</div>
+		<div>
+			<img th:src="@{/image/A4.png}" height="200px" width="200px"></img>
+		</div>
+		<div>
+			<img th:src="@{/image/A5.png}" height="200px" width="200px"></img>
+		</div>
+		<div>
+			<img th:src="@{/image/A6.png}" height="200px" width="200px"></img>
+		</div>
+
+
+	</div>
+
+	<div class="service">
+		<p>Available Trains</p>
+	</div>
+
+	<!--  Available  Train details -->
+	<div th:each="train, i : ${ListOfTrain} ">
+		<br>
+		<div>
+			<div class="train_details">
+				<div class="details_part">
+					<br>
+					<section class="train_info">
+						<H5 th:text="${train.name +' ('+ train.trainNo + ')'}"></H5>
+						<p></p>
+						<p></p>
+						<p>
+							<b> Runs On:</b> <span th:text="${scheduleList.get(i.index)}"></span>
+						</p>
+					</section>
+
+					<section class="train_info">
+						<p>
+							Source:   <span th:text="${train.source}"></span>
+						</p>
+						<p></p>
+						<p></p>
+						<p></p>
+						<p>
+							Destination:   <span th:text="${train.destination}"></span>
+						</p>
+					</section>
+					<section class="train_info">
+						<p>
+							Source At: <span th:text="${train.arrivalTime}"></span>
+						</p>
+						<p></p>
+						<p></p>
+						<p></p>
+						
+						<p>
+							Destination At: <span th:text="${train.departureTime}"></span>
+						</p>
+					</section>
+					<section class="train_info">
+						<p>
+							AC 1 - <span th:text="${train.seat1ACount +' AVL'}" style="color:green"></span>
+						</p>
+						<p>
+							AC 2 - <span th:text="${train.seat2ACount +' AVL'}" style="color:green"></span>
+						</p>
+						<p>
+							SLP  - <span th:text="${train.seatSlCount +' AVL'}" style="color:green"></span>
+						</p>
+						<p>
+							GEN  - <span th:text="${train.seatGenCount +' AVL'}" style="color:green"></span>
+						</p>
+
+					</section>
+					<section class="train_info">
+						<p>
+							&#8377 <span th:text="${train.seat1APrice}" style="color:green"></span>
+						</p>
+						<p>
+							&#8377 <span th:text="${train.seat2APrice}" style="color:green"></span>
+						</p>
+						<p>
+							&#8377 <span th:text="${train.seatSlPrice}" style="color:green"></span>
+						</p>
+						<p>
+							&#8377 <span th:text="${train.seatGenPrice}" style="color:green"></span>
+						</p>
+
+					</section>
+				</div>
+				<div class="Book_part">
+
+					<button>BOOK NOW</button>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<footer class="bg-dark text-white py-4" style="margin-top: 80px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h5>Contact Us</h5>
+					<p>
+						Indian Railway Catering and Tourism Corporation Ltd.,<br>
+						B-148, 11th Floor, Statesman House,<br> Barakhamba Road, New
+						Delhi - 110001, India
+					</p>
+					<p>Email: care@irctc.co.in</p>
+					<p>Phone: 139 (24x7 Customer Support)</p>
+				</div>
+
+				<div class="col-md-4">
+					<h5>Follow Us</h5>
+					<ul class="list-unstyled">
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Twitter</a></li>
+						<li><a href="#">Instagram</a></li>
+						<li><a href="#">YouTube</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-4">
+					<h5>About Us</h5>
+					<ul class="list-unstyled">
+						<li><a href="#">About us </a></li>
+						<li><a href="#">Term and Condition</a></li>
+						<li><a href="#">Policy</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">FAQ</a></li>
+					</ul>
+
+				</div>
+			</div>
+			<hr class="bg-light">
+			<div class="text-center">
+				<p>&copy; 2024 IRCTC. All Rights Reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Bootstrap JS script link -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Your custom scripts -->
+	<script src="scripts.js"></script>
+
+</body>
+</html>

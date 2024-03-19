@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification Page</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #f4f4f4;
+}
+
+#verificationForm {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+</style>
+</head>
+<body>
+
+	<div id="verificationForm">
+		<h2>Enter Verification Code</h2>
+		<div th:if="${notVerified}">
+			<p>
+				<script>alert("Wrong otp try again")</script>
+			</p>
+		</div>
+		<form id="verifyForm" th:action="@{/user/verify/} + ${userEmail}"
+			th:object="${verification}" method="GET">
+			<label for="verificationCode"></label><input type="text"
+				th:field="*{otp}" id="verificationCode" name="verificationCode"
+				placeholder="Enter code" required> <br>
+			<br>
+			<button type="submit">Verify</button>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Login Page</title>
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+.header1 {
+	color: black;
+	font-size: 20px;
+	display: flex;
+	flex-direction: row;
+	background-color:#3d8bc7;
+}
+.header1 img
+{
+
+margin-left:60px;
+margin-top:5px;
+}
+
+.header1  a {
+	margin-left: 30px;
+	padding: 12px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+ .header1 span
+{
+margin-left:10px;
+margin-right:63%;
+margin-top:10px;
+color:white;
+
+}
+
+.header1 a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+a:active {
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+.card
+{
+margin-top:50px;
+
+}
+
+footer {
+    background-color: #3d8bc7;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>
+</head>
+<body>
+<header class="header1">
+<img th:src="@{/image/secondry-logo.png}"  height="40px" width="50px"></img>
+<span>IRCTC</span>
+<a th:href="@{/user/home}">Home</a>
+<a th:href="@{/user/registration}">Register</a>
+</header>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header" style="background-color: #3d8bc7">
+					
+					<h3 class="text-center">Login to IRCTC Login</h3>
+					</div>
+					<div class="card-body">
+						<form id="loginForm" th:action="@{/user/login}"
+							th:object="${login}" method="POST">
+							<div class="mb-3">
+
+								<label for="email" class="form-label">Email address</label> <input
+									type="text" class="form-control" id="email"
+									placeholder="Enter your email" th:field="*{email}"
+									th:classappend="${#fields.hasErrors('email')?'is-invalid' : ''}">
+
+								<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+									id="validationServer03Feedback" class="invalid-feedback">
+								</div>
+								<small style="color: #dc3545"></small>
+							</div>
+							<div class="mb-3">
+								<label for="password" class="form-label">Password</label> <input
+									type="password" class="form-control" id="password"
+									placeholder="Enter your password" th:field="*{password}"
+									th:classappend="${#fields.hasErrors('password')?'is-invalid' : ''}">
+
+								<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+									id="validationServer03Feedback" class="invalid-feedback">
+								</div>
+								<small style="color: #dc3545"></small>
+							</div>
+
+							
+							<div th:if="${incorrect}">
+   							<script>alert("Incorrect Credentials!!!")</script>
+							</div>
+						
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary btn-block active">Login</button>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer>
+		<div class="container">
+			<p>© 2024 IRCTC. All rights reserved.</p>
+		</div>
+	</footer>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+		
+	</script>
+
+	<script>
+	document.getElementById("loginForm").addEventListener("submit",
+		    function(event) {
+		        var email = document.getElementById("email");
+		        var password = document.getElementById("password");
+
+		        removeError(email);
+		        removeError(password);
+
+		        if (email.value.trim() === "" || !validateEmail(email.value))
+		            showError(email, "Invalid email");
+
+		        else if (password.value.trim() === "")
+		            showError(password, "password can not be blank");
+		    });
+
+		function showError(input, errMessage) {
+		    const formControl = input.parentElement;
+		    const small = formControl.querySelector('small');
+		    small.innerHTML = errMessage;
+		    input.classList.add("is-invalid");
+		    event.preventDefault();
+		};
+
+		function removeError(input) {
+		    const formControl = input.parentElement;
+		    const small = formControl.querySelector('small');
+		    small.innerHTML = "";
+		    input.classList.remove("is-invalid");
+		};
+
+		function validateEmail(email) {
+		    var validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		    return email.match(validRegex);
+		}
+	</script>
+
+
+</body>
+</html>

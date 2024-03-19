@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+        background-color:lightBlue;
+        }
+         #blink {
+         font-weight: bold;
+                    font-family: sans-serif;
+                    color:black;
+                    margin-top:170px;
+                }
+        .log-in
+        {
+        background-color:red;color:white; padding:5px 5px;
+        }
+    </style>
+</head>
+<body>
+<center><h1 id="blink">User already registered, Try to login!</h1>
+    <a th:href="@{/login}">
+        <button class="log-in">Login here</button>
+    </a>
+</center>
+
+<!--  <script type="text/javascript"> 
+        var blink = 
+            document.getElementById('blink'); 
+ 
+        setInterval(function () { 
+            blink.style.opacity = 
+            (blink.style.opacity == 0 ? 1 : 0); 
+        }, 100); 
+    </script> -->
+</body>
+</html>
