@@ -40,7 +40,7 @@
 	margin-top: 2px;
 }
 
-.header1  a {
+.header1 a {
 	margin-left: 30px;
 	padding: 12px 0px;
 	text-align: center;
@@ -58,16 +58,26 @@ a:active {
 }
 
 a:visited {
-	color: green;
+	color: blue;
 }
 
+#login a{
+	position: absolute;
+	top: 10px;
+	right: 30px;
+	
+}
+#login a:hover{
+	text-decoration: underline;
+}
     
   </style>
 </head>
 <body>
 <header class="header1">
 		<img th:src="@{/image/secondry-logo.png}" height="70px" width="70px"></img>
-		<b>WELCOME </b>  <a th:href="@{/searchTrain}">Trains</a>
+		<a th:href="@{/}"><b>WELCOME</b></a>
+		<div id="login"> <a th:href="@{/user/login}">Login</a></div>
 		
 	</header>
   

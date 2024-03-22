@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		existedUser.setLastName(user.getLastName());
 		existedUser.setEmail(user.getEmail());
 		existedUser.setContact(user.getContact());
-		existedUser.setPassword(user.getPassword());
+		existedUser.setPassword(passwordEncryption(user.getPassword()));
 		existedUser.setStatus(user.getStatus());
 		existedUser.setRole(user.getRole());
 
@@ -133,7 +133,8 @@ public class UserServiceImpl implements UserService {
 
 		while (otp.length() != 4) {
 
-			otp = String.valueOf(Math.abs((LocalTime.now().getNano() * (LocalTime.now().getNano() % 9753)) % 9999));
+			otp = String.valueOf(Math.abs((LocalTime.now().getNano()
+					* (LocalTime.now().getNano() % 9753)) % 9999));
 		}
 		return Integer.parseInt(otp);
 	}

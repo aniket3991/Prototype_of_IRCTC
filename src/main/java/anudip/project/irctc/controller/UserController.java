@@ -1,23 +1,21 @@
 package anudip.project.irctc.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import anudip.project.irctc.entity.User;
 import anudip.project.irctc.entity.UserVerification;
 import anudip.project.irctc.model.Login;
 import anudip.project.irctc.model.SearchInput;
 import anudip.project.irctc.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -27,14 +25,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-
+	/**
+	 * Method used to register new user
+	 * 
+	 * @param user   - user object with user entered details
+	 * @param result - Used for server side validation
+	 * @param model  - Model used to bind and transfer data to UI
+	 * @return - return to html page
+	 */
 	@PostMapping("/registration")
 	public String createUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			return "registration";
 		}
-       User existedUser = userService.getUserByEmail(user.getEmail());
+		User existedUser = userService.getUserByEmail(user.getEmail());
 		if (existedUser != null)
 			user.setUserId(existedUser.getUserId());
 		if (existedUser == null || existedUser.getStatus() == 0) {
@@ -47,9 +52,14 @@ public class UserController {
 		model.addAttribute("existedUser", true);
 		return "registration";
 	}
-
+	
+	/**
+	 * Method used to hit a particular html page
+	 * @param model - Model used to bind and transfer data to UI
+	 * @return - return to html page
+	 */
 	@GetMapping("/registration")
-  public String registrationPage(Model model) {
+	public String registrationPage(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "registration";
@@ -61,7 +71,6 @@ public class UserController {
 		boolean notVerified = true;
 		verification.setEmail(email);
 
-
 		if (userService.verifyUser(verification)) {
 			return "redirect:/user/login";
 		}
@@ -69,38 +78,26 @@ public class UserController {
 		return "redirect:/verification?email=" + email;
 	}
 
-	@GetMapping("/getAll")
-	public ResponseEntity<List<User>> getAllUser() {
-		List<User> list = userService.getAllUser();
-		return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-
-	@GetMapping("/details/{email}")
-	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
-		User user = userService.getUserByEmail(email);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-
-	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") int userId) {
-		userService.deleteUser(userId);
-		return new ResponseEntity<>("user is deleted Successfully", HttpStatus.OK);
-	}
-	
-
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(Model model, HttpSession httpSession) {
+
+		if (httpSession.getAttribute("email") != null)
+			return "redirect:/user/home";
+
 		Login login = new Login();
 		model.addAttribute("login", login);
 		return "login";
 	}
 
 	@PostMapping("/login")
-	public String login(@Valid @ModelAttribute("login") Login login, BindingResult result, Model model) {
+	public String login(@Valid @ModelAttribute("login") Login login, BindingResult result, Model model,
+			HttpSession httpSession) {
 		if (result.hasErrors())
 			return "login";
 
 		if (userService.userAuthentication(login)) {
+			httpSession.setAttribute("email", login.getEmail());
+			httpSession.setMaxInactiveInterval(60 * 30);
 			model.addAttribute("user", userService.getUserByEmail(login.getEmail()));
 			return "redirect:/user/home";
 		}
@@ -108,18 +105,21 @@ public class UserController {
 		return "login";
 	}
 
-	
-	@GetMapping("/home")
-	public String homePage(Model model) {
+	@GetMapping(value = "/home")
+	public String homePage(Model model, HttpSession httpSession) {
+
+		if (httpSession.getAttribute("email") == null)
+			return "redirect:/user/login";
+
 		SearchInput input = new SearchInput();
-		model.addAttribute("search",input);
+		model.addAttribute("search", input);
+
 		return "home";
 	}
 
-	@GetMapping("/searchTrain")
-	public String search() {
-		return "searchTrain";
+	@GetMapping("/logout")
+	public String logout(HttpSession httpSession) {
+		httpSession.invalidate();
+		return "redirect:/user/login";
 	}
-
-
 }

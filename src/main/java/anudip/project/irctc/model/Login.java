@@ -1,5 +1,7 @@
 package anudip.project.irctc.model;
 
+import java.io.Serializable;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NotNull(message = "Login can not be null")
-public class Login {
+public class Login{
 
 	@NotBlank(message = "email should not be blank")
 	@NotNull(message = "email can not be null")

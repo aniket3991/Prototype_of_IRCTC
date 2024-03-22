@@ -14,7 +14,7 @@
 	font-size: 20px;
 	display: flex;
 	flex-direction: row;
-	background-color: #eef1f3;
+	background-color:#eef1f3
 }
 
 .header1 b {
@@ -118,14 +118,19 @@ a:visited {
 	margin-left: -60px;
 }
 </style>
+</head>
 <body>
 	<header class="header1">
 		<img th:src="@{/image/secondry-logo.png}" height="70px" width="70px"></img>
-		<b>WELCOME TO TRAIN GALLARY</b> <a th:href="@{/searchTrain}">Trains</a>
-		<a>Book Now</a> <a th:href="@{/ContactUs}">Contact</a>
+
+		<b>WELCOME TO TRAIN GALLARY</b> <a th:href="@{/user/home}">Search Trains</a>
+		<a th:href="@{/ContactUs}">Contact</a>
+		<a th:href="@{/user/logout}">Logout</a>
+
 	</header>
 
 	<div class="galary">
+
 		<div>
 			<img th:src="@{/image/A1.png}" height="200px" width="200px"></img>
 		</div>
@@ -144,17 +149,18 @@ a:visited {
 		<div>
 			<img th:src="@{/image/A6.png}" height="200px" width="200px"></img>
 		</div>
-
-
 	</div>
 
+	
 	<div class="service">
 		<p>Available Trains</p>
 	</div>
 
+
 	<!--  Available  Train details -->
-	<div th:each="train, i : ${ListOfTrain} ">
-		<br>
+ 	<div th:each="train, i : ${ListOfTrain} ">
+ 	<!-- form th:action="@{/train/Booking/} + ${train.source} + ${train.destination} + ${train.trainNo} + ${train.}+ ${searchDate}"   method="post"-->
+ 	<br>
 		<div>
 			<div class="train_details">
 				<div class="details_part">
@@ -164,13 +170,13 @@ a:visited {
 						<p></p>
 						<p></p>
 						<p>
-							<b> Runs On:</b> <span th:text="${scheduleList.get(i.index)}"></span>
+						<b> Runs On:</b> <span th:text="${scheduleList.get(i.index)}"></span>
 						</p>
 					</section>
 
 					<section class="train_info">
 						<p>
-							Source:   <span th:text="${train.source}"></span>
+							Source: <span th:text="${train.source}"></span> 
 						</p>
 						<p></p>
 						<p></p>
@@ -223,15 +229,18 @@ a:visited {
 					</section>
 				</div>
 				<div class="Book_part">
-
+					<a th:href="@{/train/Booking?src=} + ${train.source}+ '&dst=' + ${train.destination} +'&train=' + ${train.trainNo}+ '&date='+ ${searchDate}">
 					<button>BOOK NOW</button>
+					</a>
 
 				</div>
 
 
 			</div>
 		</div>
+	<!--  /form-->
 	</div>
+	
 
 	<footer class="bg-dark text-white py-4" style="margin-top: 80px;">
 		<div class="container">
@@ -274,7 +283,7 @@ a:visited {
 				<p>&copy; 2024 IRCTC. All Rights Reserved.</p>
 			</div>
 		</div>
-	</footer>
+	</footer> 
 
 	<!-- Bootstrap JS script link -->
 	<script
@@ -283,8 +292,5 @@ a:visited {
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<!-- Your custom scripts -->
-	<script src="scripts.js"></script>
-
 </body>
 </html>

@@ -13,5 +13,7 @@ import anudip.project.irctc.entity.Train;
 public interface SourceRepository extends JpaRepository<Source, Integer> {
 	List<Source> findAllByStation(Station station);
 	List<Source> findAllByTrain(Train train);
+	//Source findSourceByStationAndTrain(Train train,Station station);
 	
+	Source findByStationAndTrain(Station station, Train train);
 }

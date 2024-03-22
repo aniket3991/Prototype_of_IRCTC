@@ -71,6 +71,9 @@ margin-left:210px;
 margin-top:20%;
 
 }
+.container1{
+	margin-left: 20px;
+}
 </style>
 
 </head>
@@ -80,16 +83,14 @@ margin-top:20%;
 
 
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-		<div class="container" >
+		<div class="container1 container" >
 		<img th:src="@{/image/secondry-logo.png}"  height="40px" width="50px"></img>
-			<a class="navbar-brand">IRCTC</a>
+			<a th:href="@{/}" class="navbar-brand">IRCTC</a>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
-					<!-- Redirected links -->
+					
 					<li class="nav-item redirect-links">
 						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a>
-							</li>
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/user/login}">Login</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -115,7 +116,7 @@ margin-top:20%;
 						th:classappend="${#fields.hasErrors('firstName') ?'is-invalid':''}">
 					<div th:each="e : ${#fields.errors('firstName')}" th:text="${e}"
 						id="validationServer03Feedback" class="invalid-feedback"></div>
-					<small style="color: #dc3545; font-size: 10px;"></small>
+					<small style="color: #dc3545; font-size: 14px;"></small>
 
 				</div>
 				<div class="form-group">
@@ -124,7 +125,7 @@ margin-top:20%;
 						th:classappend="${#fields.hasErrors('lastName') ?'is-invalid':''}">
 					<div th:each="e : ${#fields.errors('lastName')}" th:text="${e}"
 						id="validationServer03Feedback" class="invalid-feedback"></div>
-					<small style="color: #dc3545; font-size: 10px"></small>
+					<small style="color: #dc3545; font-size: 14px"></small>
 				</div>
 				<div class="form-group">
 					<input type="tel" th:field="*{contact}" class="form-control"
@@ -132,7 +133,7 @@ margin-top:20%;
 						th:classappend="${#fields.hasErrors('contact') ?'is-invalid':''}">
 					<div th:each="e : ${#fields.errors('contact')}" th:text="${e}"
 						id="validationServer03Feedback" class="invalid-feedback"></div>
-					<small style="color: #dc3545; font-size: 10px;"></small>
+					<small style="color: #dc3545; font-size: 14px;"></small>
 				</div>
 				<div class="form-group">
 					<input type="text" th:field="*{email}" class="form-control"
@@ -140,7 +141,7 @@ margin-top:20%;
 						th:classappend="${#fields.hasErrors('email') ?'is-invalid':''}">
 					<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
 						id="validationServer03Feedback" class="invalid-feedback"></div>
-					<small style="color: #dc3545; font-size: 10px;"></small>
+					<small style="color: #dc3545; font-size: 14px;"></small>
 				</div>
 				<div class="form-group">
 					<input type="password" th:field="*{password}" class="form-control"
@@ -148,12 +149,12 @@ margin-top:20%;
 						th:classappend="${#fields.hasErrors('password') ?'is-invalid':''}">
 					<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
 						id="validationServer03Feedback" class="invalid-feedback"></div>
-					<small style="color: #dc3545; font-size: 10px;"></small>
+					<small style="color: #dc3545; font-size: 14px;"></small>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control"
 						placeholder="Confirm Password" id="confirmPassword"> <small
-						style="color: #dc3545; font-size: 10px;"></small>
+						style="color: #dc3545; font-size: 14px;"></small>
 				</div>
 				<div class="form-group">
 
@@ -173,7 +174,7 @@ margin-top:20%;
 
 					<div id="radio-error" class="invalid-feedback"
 						th:each="e: ${#fields.errors('role')}" th:text="${e}"></div>
-					<small style="color: #dc3545; font-size: 10px;"></small>
+					<small style="color: #dc3545; font-size: 14px;"></small>
 
 
 					<div th:if="${existedUser}">
@@ -204,102 +205,7 @@ margin-top:20%;
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	<script>
-	    
-    function formFieldValidation(){
-            var firstName = document.getElementById("firstName");
-            var lastName = document.getElementById("lastName");
-            var phone = document.getElementById("phone");
-            var email = document.getElementById("email");
-            var password = document.getElementById("password");
-            var confirmPassword = document.getElementById("confirmPassword");
-            var userAdminAccount = document.getElementById("userAdminAccount");
-            
-            
-            removeAllError(firstName, lastName, phone, email, password, confirmPassword, userAdminAccount);
-
-            if (firstName.value.trim() === ""){
-            	showError(firstName, "*First Name should not be blank");
-      	        }
-
-            else if (lastName.value.trim() === ""){
-            	showError(lastName, "*Last Name should not be blank");
-      	        }
-            	
-
-            else if (phone.value.trim() === "" || !validatePhoneNumber(phone.value)){
-            	showError(phone, "*Invalid Contact");
-      	        }
-            	
-
-            else if (email.value.trim() === "" || !validateEmail(email.value)){
-            	showError(email, "*Invalid email");
-      	        }
-            	
-
-            else if (password.value.trim() === ""){
-            	showError(password, "*password should not be blank");
-      	        }
-            	
-
-            else if (!isPasswordMatch()){
-            	showError(confirmPassword, "*password and confirm password should be same");
-      	        }
-            else if (!isAccountTypeSelected()){
-            	showError(userAdminAccount, "*Kindly select Account Type");
-      	        }
-    };
-
-    document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    	formFieldValidation();
-    });
-    
-    function showError(input, errMessage){
-	    const parentElement = input.parentElement;
-	    const small = parentElement.querySelector('small');
-	    small.innerHTML = errMessage;
-	    input.classList.add("is-invalid");
-	    event.preventDefault();
-	  };
-	
-	  function removeError(input){
-		    const formControl = input.parentElement;
-		    const small = formControl.querySelector('small');
-		    small.innerHTML = "";
-		    input.classList.remove("is-invalid");
-		  };
-	  
-	  function removeAllError(firstName, lastName, phone, email, password, confirmPassword, userAdminAccount){
-		  removeError(firstName);
-		  removeError(lastName);
-		  removeError(phone);
-		  removeError(email);
-		  removeError(password);
-		  removeError(confirmPassword);
-		  removeError(userAdminAccount);
-	  };
-	  
-	  function validatePhoneNumber(phoneNumber) {
-	      var phonePattern = /^\d{10}$/;
-	      return phonePattern.test(phoneNumber);
-	    };
-	  
-	  function validateEmail(email) {
-		  var validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		  return email.match(validRegex);
-		}
-	  
-	  function isPasswordMatch(){
-		  var password = document.getElementById("password").value;
-		  var confirmPassword = document.getElementById("confirmPassword").value;
-	      return password === confirmPassword;
-	    };
-	    
-	    function isAccountTypeSelected(){
-	    	return document.getElementById("user").checked || document.getElementById("admin").checked;
-	    };
-    
-</script>
+	<script th:src="@{/js/registrationValidation.js}"></script>
 
 </body>
 </html>

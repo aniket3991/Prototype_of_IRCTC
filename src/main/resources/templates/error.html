@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 <!-- Custom CSS -->
 <style>
 body {
-	padding-top: 70px; /* Adjust for fixed navbar height */
+	padding-top: 70px;
 }
 
 .navbar-brand {
@@ -56,7 +56,7 @@ body {
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/user/login}">Login</a></li>
 							<li class="nav-item"><a class="nav-link"
-								th:href="@{/user/login}">Contact</a></li>
+								th:href="@{/contactUs}">Contact Us</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -73,7 +73,6 @@ body {
 		<a th:href="@{/}" class="btn btn-primary">Back to Home</a>
 	</div>
 
-	<!-- Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

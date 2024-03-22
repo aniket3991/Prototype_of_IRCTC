@@ -30,6 +30,7 @@
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
+	color: black;
 }
 
 .header1 span {
@@ -42,10 +43,6 @@
 .header1 a:hover {
 	color: blue;
 	text-decoration: underline;
-}
-
-a:active {
-	color: blue;
 }
 
 a:visited {
@@ -119,12 +116,24 @@ footer {
 .is-invalid {
 	border: 1px solid red;
 }
+.header-options{
+	position: absolute;
+	top: 6px;
+	right: 10px;
+	margin-right:20px;
+}
 </style>
 </head>
 <body>
 	<header class="header1">
 		<img th:src="@{/image/secondry-logo.png}" height="40px" width="50px"></img>
-		<span>IRCTC</span> <a th:href="@{/user/home}">Home</a> <a>Contact</a>
+		<a th:href="@{/}"><span>IRCTC</span></a>
+		 <div class="header-options">
+		 	<a th:href="@{/user/home}">Search Train</a>
+		 	<a th:href="@{/contactUs}">Contact</a>
+		 	<a th:href="@{/user/logout}">Logout</a>
+		 </div>
+		 
 	</header>
 
 
@@ -188,47 +197,8 @@ footer {
 		</div>
 	</footer>
 
-	<script>
-		document.getElementById("searchTrain").addEventListener(
-				"submit",
-				function(event) {
-					
-					var trainNo = document.getElementById("trainNo");
 
-					removeError(trainNo);
-
-					if (trainNo.value.trim() === ""  || !checkTrainNo(trainNo.value))
-						showError(trainNo, "Invalid train number It must has 5 digits");
-				});
-
-		function showError(input, errMessage) {
-			const formControl = input.parentElement;
-			const small = formControl.querySelector('small');
-			small.innerHTML = errMessage;
-			input.classList.add("is-invalid");
-			event.preventDefault();
-		};
-
-		function removeError(input) {
-			const formControl = input.parentElement;
-			const small = formControl.querySelector('small');
-			small.innerHTML = "";
-			input.classList.remove("is-invalid");
-		};
-		
-		function checkTrainNo(trainNo){
-			if(trainNo.length !== 5)
-				return false;
-			
-			for(let i = 0; i < 5; i++){
-				if(!(trainNo.charAt(i) <= '9' && trainNo.charAt(i) >= '0')){
-					return false;
-				}
-			}
-			return true;
-		};
-	</script>
-
+	<script th:src="@{/js/traindetailsValidation.js}"></script>
 
 </body>
 </html>
